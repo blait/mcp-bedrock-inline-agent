@@ -11,6 +11,7 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
 2. **Docker** 설치 (최신 버전 권장)
 3. **AWS 계정** 및 적절한 권한을 가진 IAM 사용자
 4. **Amazon Bedrock** 접근 권한 (Claude 모델 사용)
+5. **Amazon Bedrock Inline Agent SDK** 설치 (아래 설치 방법 참조)
 
 ## 설치 방법
 
@@ -32,9 +33,25 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
    ```bash
    pip install -r requirements.txt
    ```
-   > 참고: requirements.txt 파일에는 streamlit, boto3, mcp 패키지가 포함되어 있습니다. boto3의 bedrock-agent-runtime 클라이언트의 invoke_inline_agent 메서드를 사용합니다.
+   > 참고: requirements.txt 파일에는 streamlit, boto3, mcp 패키지가 포함되어 있습니다.
 
-4. Docker 이미지 다운로드:
+4. Amazon Bedrock Inline Agent SDK 설치:
+   ```bash
+   # Amazon Bedrock Agent 샘플 저장소 클론
+   git clone https://github.com/awslabs/amazon-bedrock-agent-samples.git
+   
+   # InlineAgent 디렉토리로 이동
+   cd amazon-bedrock-agent-samples/src/InlineAgent
+   
+   # 개발 모드로 패키지 설치
+   pip install -e .
+   
+   # 원래 디렉토리로 돌아가기
+   cd ../../../
+   ```
+   > 중요: InlineAgent SDK는 Amazon Bedrock의 Inline Agent 기능을 사용하기 위한 Python 래퍼입니다. 이 SDK는 AWS CLI 명령을 실행하고 결과를 처리하는 데 필요합니다.
+
+5. Docker 이미지 다운로드:
    ```bash
    docker pull ghcr.io/alexei-led/aws-mcp-server:latest
    ```
@@ -81,6 +98,43 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
 3. **라이브러리 관련 오류**:
    - 가상 환경이 활성화되어 있는지 확인
    - 필요한 모든 패키지가 설치되어 있는지 확인: `pip list`
+
+4. **InlineAgent SDK 관련 오류**:
+   - InlineAgent SDK가 올바르게 설치되었는지 확인: `pip list | grep InlineAgent`
+   - 설치 과정에서 오류가 발생한 경우 다음 명령으로 다시 시도:
+     ```bash
+     cd amazon-bedrock-agent-samples/src/InlineAgent
+     pip install -e .
+     ```
+   - 저장소 클론에 문제가 있는 경우 저장소를 삭제하고 다시 클론:
+     ```bash
+     rm -rf amazon-bedrock-agent-samples
+     git clone https://github.com/awslabs/amazon-bedrock-agent-samples.git
+     ```
+
+## 아키텍처 및 작동 방식
+
+이 애플리케이션은 다음과 같은 구성 요소로 이루어져 있습니다:
+
+1. **Streamlit 웹 인터페이스**
+   - 사용자 입력을 받고 결과를 표시하는 대화형 웹 인터페이스
+   - 실시간으로 AI의 사고 과정을 보여주는 확장 패널
+
+2. **Amazon Bedrock Inline Agent**
+   - 사용자 질문을 해석하고 적절한 AWS CLI 명령을 결정
+   - InlineAgent SDK를 통해 통합
+
+3. **MCP (Model Context Protocol) 서버**
+   - Docker 컨테이너에서 실행되는 AWS CLI 명령 처리기
+   - AWS 자격 증명을 안전하게 사용하여 명령 실행
+
+4. **작동 흐름**
+   - 사용자가 질문 입력
+   - Bedrock Inline Agent가 질문을 해석하고 필요한 AWS CLI 명령 결정
+   - MCP 서버가 AWS CLI 명령을 실행하고 결과 반환
+   - 결과를 해석하여 사용자에게 표시
+
+![아키텍처 다이어그램](https://github.com/user-attachments/assets/5496f5cf-f8e8-4133-9085-4f9f4719acf5)
 
 ## 주요 기능
 
