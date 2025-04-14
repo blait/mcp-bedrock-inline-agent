@@ -2,6 +2,8 @@
 
 AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트입니다. Amazon Bedrock과 AWS CLI를 활용하여 AWS 리소스를 관리하고 정보를 조회할 수 있습니다.
 
+<img width="562" alt="image" src="https://github.com/user-attachments/assets/617da405-f241-40a1-a35d-c32e018cee57" />
+
 ## 사전 요구사항
 
 1. **Python 3.9 이상** 설치
@@ -97,7 +99,7 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
 - "지난 달 가장 비용이 많이 발생한 서비스는 무엇인가요?"
 
 
-<img width="562" alt="image" src="https://github.com/user-attachments/assets/617da405-f241-40a1-a35d-c32e018cee57" />
+
 
 
 
