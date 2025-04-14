@@ -79,7 +79,7 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
 
 2. 애플리케이션 실행:
    ```bash
-   streamlit run aws_chat_with_thoughts.py
+   streamlit run aws_chat_with_thoughts_stream.py
    ```
 
 3. 웹 브라우저가 자동으로 열리고 애플리케이션에 접속됩니다.
@@ -134,7 +134,7 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
    - MCP 서버가 AWS CLI 명령을 실행하고 결과 반환
    - 결과를 해석하여 사용자에게 표시
 
-![아키텍처 다이어그램](https://github.com/user-attachments/assets/5496f5cf-f8e8-4133-9085-4f9f4719acf5)
+
 
 ## 주요 기능
 
