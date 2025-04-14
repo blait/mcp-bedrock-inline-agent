@@ -46,8 +46,6 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
    # 개발 모드로 패키지 설치
    pip install -e .
    
-   # 원래 디렉토리로 돌아가기
-   cd ../../../
    ```
    > 중요: InlineAgent SDK는 Amazon Bedrock의 Inline Agent 기능을 사용하기 위한 Python 래퍼입니다. 이 SDK는 AWS CLI 명령을 실행하고 결과를 처리하는 데 필요합니다.
 
