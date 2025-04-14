@@ -155,6 +155,6 @@ AWS CLI 명령을 실행하고 결과를 해석하는 대화형 어시스턴트�
 
 
 
-
+referanced & powered https://github.com/alexei-led/aws-mcp-server/pkgs/container/aws-mcp-server 
 
 
