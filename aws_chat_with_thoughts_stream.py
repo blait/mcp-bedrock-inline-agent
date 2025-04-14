@@ -41,6 +41,10 @@ for message in st.session_state.messages:
         else:
             st.markdown(message["content"])
 
+# 사용자 홈 디렉토리 경로 설정
+import os
+USER_HOME = os.path.expanduser("~")
+
 # AWS CLI MCP 서버 설정
 def get_server_params():
     return StdioServerParameters(
@@ -50,7 +54,7 @@ def get_server_params():
             "-i",
             "--rm",
             "-v",
-            "/Users/hyeonsup/.aws:/home/appuser/.aws:ro",
+            f"{USER_HOME}/.aws:/home/appuser/.aws:ro",
             "ghcr.io/alexei-led/aws-mcp-server:latest"
         ]
     )
